@@ -7,9 +7,13 @@ Main contributor: Muhammad Derakhshan
 
 import requests
 import json
+import os
+from dotenv import load_dotenv
 
-# Prompt for the API token
-botToken = input("Enter your API token from BotFather >> ")
+load_dotenv()
+botToken = os.getenv("BOT_TOKEN")
+if not botToken:
+    raise ValueError("No bot token found. Please check your .env file.")
 baseUrl = f'https://api.telegram.org/bot{botToken}/'
 
 def getMe():
@@ -158,4 +162,3 @@ def setMyDefaultAdministratorRights(rights=None, for_channels=False):
         print(f"Error: {response.status_code}")
         return None
     return response.json()
-
