@@ -1,5 +1,6 @@
 from flask import Flask, current_app
 from flask_pymongo import PyMongo
+from db import close_db
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +14,8 @@ def create_app():
     # Register the webhook route
     from webhook import webhook as webhook_blueprint
     app.register_blueprint(webhook_blueprint)
+
+    app.teardown_appcontext(close_db)
 
     return app
 
