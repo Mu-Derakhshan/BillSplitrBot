@@ -11,12 +11,11 @@ def handle_webhook():
 
     # Extract the JSON data from the request
     data = request.json
-    print(data)
 
-    if data["message"].get("text", "") == "/start":
+    if data.get("message", {}).get("text", "") == "/start":
         sendMessage(data["message"]["chat"]["id"], "Hello I got your message")
 
-    if (new_members := data["message"].get("new_chat_members", [])):
+    if (new_members := data.get("message", {}).get("new_chat_members", [])):
         for member in new_members:
             if member["id"] == 7559634418:
                 sendMessage(data["message"]["chat"]["id"], "Hello I'm added to your group")
