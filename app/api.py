@@ -16,6 +16,7 @@ async def get_user_id(username):
     phone_number = '14808537840'
     await client.start(phone_number)
     user = await client.get_entity(username)
+    client.disconnect()
     return user.id
 
 
