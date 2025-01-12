@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
+from handlers import add_bill_handler
 
 webhook = Blueprint('webhook', __name__)
 
@@ -37,7 +38,8 @@ def handle_webhook():
                     if entity["type"] == "bot_command":
                         cmd = msg["text"][entity["offset"]:entity["offset"]+entity["length"]]
                 if cmd == "/add_bill@BillSplitrBot":
-                    print("add_bill_command handler should be called")
+                    user_ids = add_bill_handler(data)
+                    print(user_ids)
     
     return "OK", 200
 
