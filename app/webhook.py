@@ -14,7 +14,7 @@ def handle_webhook():
     data = request.json
 
     if data["message"]["text"] == "/start":
-        sendMessage(data["message"]["sender_chat"]["id"], "Hello I got your message")
+        sendMessage(data["message"]["chat"]["id"], "Hello I got your message")
     
     return "OK", 200
 
