@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_pymongo import PyMongo
+from api import sendMessage
 
 webhook = Blueprint('webhook', __name__)
 
@@ -10,6 +11,11 @@ def handle_webhook():
 
     # Extract the JSON data from the request
     data = request.json
+
+    if data["message"]["text"] == "/start":
+        sendMessage(data["message"]["sender_chat"]["id"], "Hello I got your message")
+    
+    return "OK", 200
 
     # Insert the data into the MongoDB collection
     collection = mongo.db.your_collection_name
