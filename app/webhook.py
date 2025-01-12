@@ -32,7 +32,12 @@ def handle_webhook():
     if (msg := data.get("message", {})):
         if msg["chat"]["type"] in ["group", "supergroup"]:
             if (entities := msg.get("entities", None)):
-                print(data)
+                cmd = None
+                for entity in entities:
+                    if entity["type"] == "bot_command":
+                        cmd = msg["text"][entity["offset"]:entity["offset"]+entity["length"]]
+                if cmd == "/add_bill@BillSplitrBot":
+                    print("add_bill_command handler should be called")
     
     return "OK", 200
 
