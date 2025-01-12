@@ -17,6 +17,7 @@ api_hash = '405ae53edc62eeb2bf37808608e102f3'
 def get_user_id(username):
     with TelegramClient('session_name', api_id, api_hash) as client:
         user = client.get_entity(username)
+        print(username, user.id)
         return user.id
 
 
