@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from flask_pymongo import PyMongo
 from api import sendMessage
 from db import get_db
 
