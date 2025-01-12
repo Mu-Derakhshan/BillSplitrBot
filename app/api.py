@@ -9,15 +9,10 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
-from telethon import TelegramClient
-
-api_id = '29987776'
-api_hash = '405ae53edc62eeb2bf37808608e102f3'
-phone_number = '14808537840'
-
-client = TelegramClient('bill_session', api_id, api_hash)
+from client import get_client
 
 async def get_user_id(username):
+    client = get_client()
     await client.start(phone_number)
     user = await client.get_entity(username)
     return user.id
