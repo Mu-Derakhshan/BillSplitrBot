@@ -27,6 +27,11 @@ def handle_webhook():
         ):
             sendMessage(membership_update['chat']['id'], "Hello I'm added to your group")
             print(f"added to chat {membership_update['chat']['id']}")
+
+    ### Handling the commands ###
+    if (msg := data.get("message", {})):
+        if msg["chat"]["type"] in ["group", "supergroup"]:
+            print(msg["entities"])
     
     return "OK", 200
 
