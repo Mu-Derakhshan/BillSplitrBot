@@ -9,6 +9,18 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+from telethon import TelegramClient
+
+api_id = '29987776'
+api_hash = '405ae53edc62eeb2bf37808608e102f3'
+
+client = TelegramClient('session_name', api_id, api_hash)
+
+def get_user_id(username):
+    with client:
+        user = client.loop.run_until_complete(client.get_entity(username))
+        return user.id
+
 
 load_dotenv()
 botToken = os.getenv("BOT_TOKEN")
