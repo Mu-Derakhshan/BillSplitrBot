@@ -14,7 +14,7 @@ from telethon import TelegramClient
 api_id = '29987776'
 api_hash = '405ae53edc62eeb2bf37808608e102f3'
 
-client = TelegramClient('session_name', api_id, api_hash)
+client = TelegramClient('bill_session', api_id, api_hash)
 
 async def get_user_id(username):
     await client.start(phone_number)
