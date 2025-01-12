@@ -31,6 +31,8 @@ def handle_webhook():
     ### Handling the commands ###
     if (msg := data.get("message", {})):
         if msg["chat"]["type"] in ["group", "supergroup"]:
+            print("msg from a chat received")
+            print(data)
             if (entities := msg.get("entities", None)):
                 print(entities)
     
