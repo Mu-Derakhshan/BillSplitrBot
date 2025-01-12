@@ -15,13 +15,7 @@ def handle_webhook():
     if data.get("message", {}).get("text", "") == "/start":
         sendMessage(data["message"]["chat"]["id"], "Hello I got your message")
 
-    if (new_members := data.get("message", {}).get("new_chat_members", [])):
-        for member in new_members:
-            if member["id"] == 7559634418:
-                sendMessage(data["message"]["chat"]["id"], "Hello I'm added to your group")
-
     if (membership_update := data.get("my_chat_member", {})):
-        print(membership_update)
         if (
             membership_update["old_chat_member"]["status"] in ["administrator", "member"] and 
             membership_update["new_chat_member"]["status"] in ["left", "kicked"]
@@ -31,6 +25,7 @@ def handle_webhook():
             membership_update["new_chat_member"]["status"] in ["administrator", "member"] and 
             membership_update["old_chat_member"]["status"] in ["left", "kicked"] 
         ):
+            sendMessage(membership_update['chat']['id'], "Hello I'm added to your group")
             print(f"added to chat {membership_update['chat']['id']}")
     
     return "OK", 200
