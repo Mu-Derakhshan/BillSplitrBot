@@ -37,6 +37,9 @@ def handle_webhook():
                 for entity in entities:
                     if entity["type"] == "bot_command":
                         cmd = msg["text"][entity["offset"]:entity["offset"]+entity["length"]]
+                if cmd == "/register@BillSplitrBot":
+                    db.users.insert_one({"user_id": msg["from"]["id"], "username": msg["from"].get("username", "")})
+                    sendMessage(msg["chat"]["id"], "You are registered successfully")
                 if cmd == "/add_bill@BillSplitrBot":
                     user_ids = add_bill_handler(data)
                     print(user_ids)
