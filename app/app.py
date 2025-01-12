@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, current_app
 from flask_pymongo import PyMongo
 
 def create_app():
@@ -8,7 +8,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     # Initialize Flask-PyMongo
-    mongo = PyMongo(app)
+    mongo = PyMongo(current_app)
 
     # Register the webhook route
     from webhook import webhook as webhook_blueprint
