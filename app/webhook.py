@@ -12,8 +12,21 @@ def handle_webhook():
     # Extract the JSON data from the request
     data = request.json
 
-    if data["message"]["text"] == "/start":
+    if data.get("message", {}).get("text", "") == "/start":
         sendMessage(data["message"]["chat"]["id"], "Hello I got your message")
+
+    if (membership_update := data.get("my_chat_member", {})):
+        if (
+            membership_update["old_chat_member"]["status"] in ["administrator", "member"] and 
+            membership_update["new_chat_member"]["status"] in ["left", "kicked"]
+        ):
+            print(f"Removed from chat {membership_update['chat']['id']}")
+        elif (
+            membership_update["new_chat_member"]["status"] in ["administrator", "member"] and 
+            membership_update["old_chat_member"]["status"] in ["left", "kicked"] 
+        ):
+            sendMessage(membership_update['chat']['id'], "Hello I'm added to your group")
+            print(f"added to chat {membership_update['chat']['id']}")
     
     return "OK", 200
 
