@@ -1,0 +1,11 @@
+👋 Hello there!
+Welcome to BillSplitr – your ultimate companion for managing shared expenses in group activities! 🎉
+
+🚀 Getting Started
+This bot works exclusively in group chats. Here's how to set me up:
+1️⃣ Add me to your group. 👫👬👭
+2️⃣ Give me admin rights.
+
+⚡ Once that's done, I’ll help you track and settle shared expenses seamlessly. 💸📊
+
+Now, let's get those group finances in order! 🤑

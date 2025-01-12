@@ -13,7 +13,12 @@ def handle_webhook():
     data = request.json
 
     if data.get("message", {}).get("text", "") == "/start":
-        sendMessage(data["message"]["chat"]["id"], "Hello I got your message")
+        try:
+            with open("MessageTemplates/start.txt", "r") as file:
+                start_message = file.read()
+            sendMessage(data["message"]["chat"]["id"], start_message)
+        except FileNotFoundError:
+            sendMessage(data["message"]["chat"]["id"], "Welcome! Please add me to your group and grant me admin rights.")
 
     if (membership_update := data.get("my_chat_member", {})):
         if (
@@ -37,4 +42,3 @@ def handle_webhook():
     # Return a response with the inserted document ID
     response = {"message": "Webhook received", "data": data, "id": str(result.inserted_id)}
     return jsonify(response)"""
-
