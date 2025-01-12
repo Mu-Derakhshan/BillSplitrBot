@@ -23,13 +23,13 @@ def handle_webhook():
     if (membership_update := data.get("my_chat_member", {})):
         print(membership_update)
         if (
-            membership_update["old_chat_member"]["status"] == ["administrator", "member"] and 
-            membership_update["new_chat_member"]["status"] == ["left", "kicked"]
+            membership_update["old_chat_member"]["status"] in ["administrator", "member"] and 
+            membership_update["new_chat_member"]["status"] in ["left", "kicked"]
         ):
             print(f"Removed from chat {membership_update['chat']['id']}")
         elif (
-            membership_update["new_chat_member"]["status"] == ["administrator", "member"] and 
-            membership_update["old_chat_member"]["status"] == ["left", "kicked"] 
+            membership_update["new_chat_member"]["status"] in ["administrator", "member"] and 
+            membership_update["old_chat_member"]["status"] in ["left", "kicked"] 
         ):
             print(f"added to chat {membership_update['chat']['id']}")
     
