@@ -7,6 +7,7 @@ def add_bill_handler(data):
     for entity in data["message"]["entities"]:
         if entity["type"] == "mention":
             username = data["message"]["text"][entity["offset"]:entity["offset"]+entity["length"]]
+            print(username)
             user_id = getChat(username)["id"]
             user_ids.append(user_id)
         elif entity["type"] == "text_mention":
