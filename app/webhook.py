@@ -29,6 +29,7 @@ def handle_webhook():
             print(f"added to chat {membership_update['chat']['id']}")
 
     ### Handling the commands ###
+    print(data)
     if (msg := data.get("message", {})):
         if msg["chat"]["type"] in ["group", "supergroup"]:
             print("msg from a chat received")
