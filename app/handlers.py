@@ -25,6 +25,7 @@ def extract_title(data):
     start_of_title = None
     for entity in data["message"]["entities"]:
         if entity["type"] == "cashtag":
+            print("found cashtag", entity["offset"])
             end_of_title = entity["offset"]
         if entity["type"] == "bot_command":
             start_of_title = entity["offset"] + entity["length"]
