@@ -90,6 +90,7 @@ def handle_webhook():
                     chat_id = msg["chat"]["id"]
                     expenses = db.expenses.find({"chat_id": chat_id})
                     for expense in expenses:
+                        print("hello")
                         expense["creditor_name"] = db.users.find_one({"user_id": expense["creditor"]})["first_name"]
                         if expense["creditor"] in expense["debtors"]:
                             expense["amount_per_person"] = expense["amount"] / len(expense["debtors"])
