@@ -85,7 +85,7 @@ def handle_webhook():
                         }
                         for debtor in user_ids if debtor != creditor
                     ])
-                    sendMessage(msg["chat"]["id"], f"added the bill successfully with title:\n {title}\n with amount: {amount}")
+                    sendMessage(msg["chat"]["id"], f"added the bill successfully")
     
     return "OK", 200
 
