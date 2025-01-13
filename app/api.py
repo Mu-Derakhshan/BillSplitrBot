@@ -39,6 +39,7 @@ def sendMessage(chatId, text):
     response = requests.post(requestUrl, json=payload)
     if response.status_code != 200:
         print(f"Error: {response.status_code}")
+        print(response.json())
         return None
     return response.json()
 
