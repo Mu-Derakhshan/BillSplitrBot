@@ -136,7 +136,7 @@ def handle_webhook():
                             {'_id': bill_id},
                             {'$set': {'unpaid': True}}
                         )
-                    sendMessage(chat_id, f"{len(bill_ids) bills paid by you thanks!}")
+                    sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
     
     return "OK", 200
 
