@@ -102,12 +102,10 @@ def handle_webhook():
                                 debtor_name = db.users.find_one({"user_id": debtor})["first_name"]
                                 debtor_paid_array.append((debtor, debtor_name, is_paid))
                         expense["debtors"] = debtor_paid_array
+                        print(expense)
                     with open('MessageTemplates/summary.txt', 'r') as file:
                         template_string = file.read()
                     template = Template(template_string)
-                    for expense in expenses:
-                        print("hey there")
-                    print(list(expenses))
                     context = {"expenses": list(expenses)}
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], rendered_string)
