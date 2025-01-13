@@ -183,5 +183,12 @@ def handle_webhook():
                         )
                         print(result.modified_count)
                     sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
-
+                if cmd == "/reset@BillSplitrBot":
+                    chat_id = msg["chat"]["id"]
+                    expenses = db.expenses.find({"chat_id": chat_id})
+                    n_expenses = len(expenses)
+                    for expense in expenses:
+                        db.bills.delete_many({"expense_id": expense["_id"]})
+                    db.expenses.delete_many({"chat_id": chat_id})
+                    sendMessage(chat_id, f"{n_expenses} expenses removed")
     return "OK", 200
