@@ -50,7 +50,7 @@ def handle_webhook():
                         sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
                     else:
                         title = extract_title(data)
-                        sendMessage(msg["chat"]["id"], "added the bill successfully with title:\n {title}")
+                        sendMessage(msg["chat"]["id"], f"added the bill successfully with title:\n {title}")
     
     return "OK", 200
 
