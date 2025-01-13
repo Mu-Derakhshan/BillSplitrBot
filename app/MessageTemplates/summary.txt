@@ -1,6 +1,6 @@
 Here is the summary of all unpaid bills
 {% for expense in expenses %}
-\{{expense.title}}
+{{expense.title}}
 amount per person in debtors: {{expense.amount_per_person}}
 creditor: [{{expense.creditor_name}}](tg://user?id={{expense.creditor}})
 debtors:

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
-from helpers import extract_user_ids, extract_title, extract_amount
+from helpers import extract_user_ids, extract_title, extract_amount, escape_markdown_v2
 from jinja2 import Template
 
 webhook = Blueprint('webhook', __name__)
@@ -109,7 +109,7 @@ def handle_webhook():
                     template = Template(template_string)
                     context = {"expenses": expenses_for_ctx}
                     rendered_string = template.render(context)
-                    sendMessage(msg["chat"]["id"], rendered_string)
+                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
     
     return "OK", 200
 
