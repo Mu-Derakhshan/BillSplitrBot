@@ -28,4 +28,5 @@ def extract_title(data):
             end_of_title = entity["offset"]
         if entity["type"] == "bot_command":
             start_of_title = entity["offset"] + entity["length"]
+    print(start_of_title, end_of_title)
     return data["message"]["text"][start_of_title:end_of_title]
