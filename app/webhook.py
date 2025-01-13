@@ -110,6 +110,23 @@ def handle_webhook():
                     context = {"expenses": expenses_for_ctx}
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
+                if cmd == "/my_debts@BillSplitrBot":
+                    chat_id = msg["chat"]["id"]
+                    user_id = msg["from"]["id"]
+                    bills = db.bills.find({"chat_id": chat_id, "debtor": user_id, "is_paid": False})
+                    bills_for_ctx = []
+                    for bill in bills:
+                        expense_id = bill["expense_id"]
+                        expense = db.expenses.find_one({"chat_id": chat_id, "expense_id": expense_id})
+                        bill["title"] = expense["title"]
+                        bill["creditor_name"] = db.users.find_one({"user_id": bill["creditor"]})["first_name"]
+                        bills_for_ctx.append(bill)
+                    with open('MessageTemplates/my_debts.txt', 'r') as file:
+                        template_string = file.read()
+                    template = Template(template_string)
+                    context = {"bills": bills_for_ctx}
+                    rendered_string = template.render(context)
+                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
     
     return "OK", 200
 

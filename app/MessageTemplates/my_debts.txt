@@ -1,0 +1,6 @@
+Here is the summary of all of your unpaid debts
+{% for bill in bills %}
+{{bill.title}}
+amount: {{bill.amount}}
+to whom?: [{{bill.creditor_name}}](tg://user?id={{bill.creditor}})
+{% endfor %}
