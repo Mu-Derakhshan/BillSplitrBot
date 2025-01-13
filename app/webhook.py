@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
-from handlers import add_bill_handler, extract_title, extract_amount
+from helpers import extract_user_ids, extract_title, extract_amount
 
 webhook = Blueprint('webhook', __name__)
 
@@ -45,7 +45,7 @@ def handle_webhook():
                     )
                     sendMessage(msg["chat"]["id"], "You are registered successfully")
                 if cmd == "/add_bill@BillSplitrBot":
-                    done, user_ids = add_bill_handler(data)
+                    done, user_ids = extract_user_ids(data)
                     if not done:
                         sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
                     else:

@@ -1,7 +1,7 @@
 import re
 from db import get_db
 
-def add_bill_handler(data):
+def extract_user_ids(data):
     db = get_db()
     user_ids = []
     usernames_unknown = []
