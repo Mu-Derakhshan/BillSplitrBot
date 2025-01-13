@@ -134,7 +134,7 @@ def handle_webhook():
                     for bill_id in bill_ids:
                         result = db.bills.update_one(
                             {'_id': bill_id},
-                            {'$set': {'unpaid': True}}
+                            {'$set': {'is_paid': True}}
                         )
                         print(result.modified_count)
                     sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
