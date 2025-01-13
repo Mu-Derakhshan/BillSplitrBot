@@ -9,34 +9,34 @@ if __name__ == "__main__":
             {
                 "command": "register",
                 "description": "register yourself in this group",
-                "scope": {"type": "all_group_chats"},
             },
             {
                 "command": "add_bill",
                 "description": "add your bill",
-                "scope": {"type": "all_group_chats"},
             },
             {
                 "command": "pay",
                 "description": "use this to pay your debts",
-                "scope": {"type": "all_group_chats"},
             },
             {
                 "command": "summary",
                 "description": "summary of all bills in the group",
-                "scope": {"type": "all_group_chats"},
             },
             {
                 "command": "my_debts",
                 "description": "see the summary of your bills only",
-                "scope": {"type": "all_group_chats"},
             },
+        ],
+        scope="all_group_chats",
+    )
+    setMyCommands(
+        [
             {
                 "command": "reset",
                 "description": "reset and delete the history of all expenses and bills history",
-                "scope": {"type": "all_chat_administrators"},
             }
-        ]
+        ],
+        scope="all_chat_administrators",
     )
     app.run(
         host="0.0.0.0",
