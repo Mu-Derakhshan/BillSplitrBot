@@ -15,6 +15,5 @@ pymongo==4.10.1
 python-dotenv==1.0.1
 requests==2.32.3
 rsa==4.9
-Telethon==1.38.1
 urllib3==2.3.0
 Werkzeug==3.1.3
