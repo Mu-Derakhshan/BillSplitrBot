@@ -10,6 +10,7 @@ import json
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
 botToken = os.getenv("BOT_TOKEN")
 if not botToken:
