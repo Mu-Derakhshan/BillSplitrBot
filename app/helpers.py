@@ -19,7 +19,7 @@ def extract_user_ids(data):
             user_ids.append(user_id)
     if usernames_unknown:
         return False, usernames_unknown
-    return True, user_ids
+    return True, [int(user_id) for user_id in user_ids]
 
 def extract_title(data):
     for entity in data["message"]["entities"]:
