@@ -132,6 +132,7 @@ def handle_webhook():
                     user_id = msg["from"]["id"]
                     bill_ids = msg["text"][len("/pay@BillSplitrBot")+1:].split()
                     for bill_id in bill_ids:
+                        print(bill_id)
                         result = db.bills.update_one(
                             {'_id': bill_id},
                             {'$set': {'is_paid': True}}
