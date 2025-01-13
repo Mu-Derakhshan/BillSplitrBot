@@ -24,3 +24,9 @@ def extract_title(data):
     for entity in data["message"]["entities"]:
         if entity["type"] == "hashtag":
             return data["message"]["text"][entity["offset"]:entity["offset"]+entity["length"]]
+
+
+def extract_amount(data):
+    text = re.search(r"[\$€£]\d+(\.\d{1,2})?", data["message"]["text"])[0]
+    amount = float(text[1:])
+    return amount
