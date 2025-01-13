@@ -127,6 +127,10 @@ def handle_webhook():
                     context = {"bills": bills_for_ctx}
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
+                if cmd == "/pay@BillSplitrBot":
+                    chat_id = msg["chat"]["id"]
+                    user_id = msg["from"]["id"]
+                    bill_id = msg["text"][len("/pay@BillSplitrBot")+1:]
     
     return "OK", 200
 

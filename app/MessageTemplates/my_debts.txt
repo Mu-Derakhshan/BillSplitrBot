@@ -3,4 +3,5 @@ Here is the summary of all of your unpaid debts
 {{bill.title}}
 amount: {{bill.amount}}
 to whom?: [{{bill.creditor_name}}](tg://user?id={{bill.creditor}})
+pay_id: `{{bill._id}}`
 {% endfor %}
