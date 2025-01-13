@@ -3,6 +3,7 @@ from api import sendMessage
 from db import get_db
 from helpers import extract_user_ids, extract_title, extract_amount, escape_markdown_v2
 from jinja2 import Template
+from bson import ObjectId
 
 webhook = Blueprint('webhook', __name__)
 
@@ -135,7 +136,7 @@ def handle_webhook():
                     for bill_id in bill_ids:
                         print(bill_id)
                         result = db.bills.update_one(
-                            {'_id': bill_id},
+                            {'_id': ObjectId(bill_id)},
                             {'$set': {'is_paid': True}}
                         )
                         print(result.modified_count)
