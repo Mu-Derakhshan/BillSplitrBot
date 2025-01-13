@@ -130,7 +130,13 @@ def handle_webhook():
                 if cmd == "/pay@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
-                    bill_id = msg["text"][len("/pay@BillSplitrBot")+1:]
+                    bill_ids = msg["text"][len("/pay@BillSplitrBot")+1:].split()
+                    for bill_id in bill_ids:
+                        result = db.bills.update_one(
+                            {'_id': bill_id},
+                            {'$set': {'unpaid': True}}
+                        )
+                    sendMessage(chat_id, f"{len(bill_ids) bills paid by you thanks!}")
     
     return "OK", 200
 
