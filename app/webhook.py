@@ -89,6 +89,7 @@ def handle_webhook():
                 if cmd == "/summary@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     expenses = db.expenses.find({"chat_id": chat_id})
+                    expenses_for_ctx = []
                     for expense in expenses:
                         expense["creditor_name"] = db.users.find_one({"user_id": expense["creditor"]})["first_name"]
                         if expense["creditor"] in expense["debtors"]:
@@ -102,11 +103,11 @@ def handle_webhook():
                                 debtor_name = db.users.find_one({"user_id": debtor})["first_name"]
                                 debtor_paid_array.append((debtor, debtor_name, is_paid))
                         expense["debtors"] = debtor_paid_array
-                        print(expense)
+                        expenses_for_ctx.append(expense)
                     with open('MessageTemplates/summary.txt', 'r') as file:
                         template_string = file.read()
                     template = Template(template_string)
-                    context = {"expenses": list(expenses)}
+                    context = {"expenses": expenses_for_ctx}
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], rendered_string)
     
