@@ -14,27 +14,9 @@ if __name__ == "__main__":
                 "command": "my_debts",
                 "description": "see the summary of your bills only",
             },
-        ],
-        scope={"type": "all_group_chats"}
-    )
-    setMyCommands(
-        [
-            {"command": "register", "description": "register yourself in this group"},
-            {"command": "add_bill", "description": "add your bill"},
-            {"command": "pay", "description": "use this to pay your debts"},
-            {"command": "summary", "description": "summary of all bills in the group"},
-            {
-                "command": "my_debts",
-                "description": "see the summary of your bills only",
-            },
-        ],
-        scope={"type": "all_chat_administrators"}
-    )
-    setMyCommands(
-        [
             {"command": "reset", "description": "remove all expenses and bills paid and unpaid use carefully"},
         ],
-        scope={"type": "all_chat_administrators"}
+        scope={"type": "all_group_chats"}
     )
     app.run(
         host="0.0.0.0",
