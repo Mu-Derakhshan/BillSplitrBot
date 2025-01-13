@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 "description": "see the summary of your bills only",
             },
         ],
-        scope="all_group_chats",
+        scope={"type": "all_group_chats"},
     )
     setMyCommands(
         [
@@ -36,7 +36,7 @@ if __name__ == "__main__":
                 "description": "reset and delete the history of all expenses and bills history",
             }
         ],
-        scope="all_chat_administrators",
+        scope={"type": "all_chat_administrators"}
     )
     app.run(
         host="0.0.0.0",
