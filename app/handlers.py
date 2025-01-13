@@ -8,8 +8,7 @@ def add_bill_handler(data):
         if entity["type"] == "mention":
             username = data["message"]["text"][entity["offset"]:entity["offset"]+entity["length"]]
             # Search for username in database if not found prompt them /register themselves
-            print(username)
-            user = db.users.find_one({"username": username})
+            user = db.users.find_one({"username": username[1:]})
             if user:
                 user_ids.append(user["user_id"])
             else:
