@@ -90,7 +90,6 @@ def handle_webhook():
                     chat_id = msg["chat"]["id"]
                     expenses = db.expenses.find({"chat_id": chat_id})
                     for expense in expenses:
-                        print("hello")
                         expense["creditor_name"] = db.users.find_one({"user_id": expense["creditor"]})["first_name"]
                         if expense["creditor"] in expense["debtors"]:
                             expense["amount_per_person"] = expense["amount"] / len(expense["debtors"])
@@ -106,6 +105,8 @@ def handle_webhook():
                     with open('MessageTemplates/summary.txt', 'r') as file:
                         template_string = file.read()
                     template = Template(template_string)
+                    for expense in expenses:
+                        print("hey there")
                     print(list(expenses))
                     context = {"expenses": list(expenses)}
                     rendered_string = template.render(context)
