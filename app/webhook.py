@@ -55,13 +55,12 @@ def handle_webhook():
                     if not done:
                         usernames_unknown = result[0]
                         text_mentions_unknown = result[1]
-                        print(text_mentions_unknown)
                         with open('MessageTemplates/unregistered.txt', 'r') as file:
                             template_string = file.read()
                         template = Template(template_string)
                         context = {"usernames_unknown": usernames_unknown, "text_mentions_unknown": text_mentions_unknown}
                         rendered_string = template.render(context)
-                        sendMessage(msg["chat"]["id"], rendered_string)
+                        print(sendMessage(msg["chat"]["id"], rendered_string))
                         return "OK", 200
                     user_ids = result[0]
                     title = extract_title(data)
