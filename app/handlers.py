@@ -1,5 +1,3 @@
-from api import get_user_id
-
 def add_bill_handler(data):
     # get people in the bill
     user_ids = []
