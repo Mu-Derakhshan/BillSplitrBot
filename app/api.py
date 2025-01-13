@@ -35,10 +35,11 @@ def sendMessage(chatId, text):
     Use this method to send text messages. On success, the sent Message is returned.
     """
     requestUrl = f'{baseUrl}sendMessage'
-    payload = {'chat_id': chatId, 'text': text}
+    payload = {'chat_id': chatId, 'text': text, "parse_mode": "MarkdownV2"}
     response = requests.post(requestUrl, json=payload)
     if response.status_code != 200:
         print(f"Error: {response.status_code}")
+        print(response.json())
         return None
     return response.json()
 

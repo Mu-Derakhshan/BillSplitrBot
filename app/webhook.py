@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
 from helpers import extract_user_ids, extract_title, extract_amount
+from jinja2 import Template
 
 webhook = Blueprint('webhook', __name__)
 
@@ -45,15 +46,23 @@ def handle_webhook():
                 if cmd == "/register@BillSplitrBot":
                     db.users.update_one(
                         {"user_id": msg["from"]["id"]},
-                        {"$set": {"username": msg["from"].get("username", "")}},
+                        {"$set": {"username": msg["from"].get("username", ""), "first_name": msg["from"]["first_name"]}},
                         upsert=True
                     )
                     sendMessage(msg["chat"]["id"], "You are registered successfully")
                 if cmd == "/add_bill@BillSplitrBot":
-                    done, user_ids = extract_user_ids(data)
+                    done, *result = extract_user_ids(data)
                     if not done:
-                        sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
+                        usernames_unknown = result[0]
+                        text_mentions_unknown = result[1]
+                        with open('MessageTemplates/unregistered.txt', 'r') as file:
+                            template_string = file.read()
+                        template = Template(template_string)
+                        context = {"usernames_unknown": usernames_unknown, "text_mentions_unknown": text_mentions_unknown}
+                        rendered_string = template.render(context)
+                        sendMessage(msg["chat"]["id"], rendered_string)
                         return "OK", 200
+                    user_ids = result[0]
                     title = extract_title(data)
                     amount = extract_amount(data)
                     creditor = int(msg["from"]["id"])
@@ -76,7 +85,7 @@ def handle_webhook():
                         }
                         for debtor in user_ids if debtor != creditor
                     ])
-                    sendMessage(msg["chat"]["id"], f"added the bill successfully with title:\n {title}\n with amount: {amount}")
+                    sendMessage(msg["chat"]["id"], f"added the bill successfully")
     
     return "OK", 200
 
