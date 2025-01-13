@@ -105,8 +105,7 @@ def handle_webhook():
                     with open('MessageTemplates/summary.txt', 'r') as file:
                         template_string = file.read()
                     template = Template(template_string)
-                    context = {"expenses": expenses}
-                    print(expenses)
+                    context = {"expenses": list(expenses)}
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], rendered_string)
     
