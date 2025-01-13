@@ -117,7 +117,7 @@ def handle_webhook():
                     bills_for_ctx = []
                     for bill in bills:
                         expense_id = bill["expense_id"]
-                        expense = db.expenses.find_one({"chat_id": chat_id, "expense_id": expense_id})
+                        expense = db.expenses.find_one({"chat_id": chat_id, "_id": expense_id})
                         bill["title"] = expense["title"]
                         bill["creditor_name"] = db.users.find_one({"user_id": bill["creditor"]})["first_name"]
                         bills_for_ctx.append(bill)
