@@ -40,7 +40,7 @@ def extract_amount(data):
 
 
 def escape_markdown_v2(text):
-    special_chars = r"#."
+    special_chars = r"#._"
     for char in special_chars:
         text = text.replace(char, f'\\{char}')
     return text
