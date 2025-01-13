@@ -45,8 +45,11 @@ def handle_webhook():
                     )
                     sendMessage(msg["chat"]["id"], "You are registered successfully")
                 if cmd == "/add_bill@BillSplitrBot":
-                    user_ids = add_bill_handler(data)
-                    print(user_ids)
+                    done, user_ids = add_bill_handler(data)
+                    if not done:
+                        sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
+                    else:
+                        sendMessage(msg["chat"]["id"], "added the bill successfully")
     
     return "OK", 200
 
