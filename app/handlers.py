@@ -21,13 +21,6 @@ def add_bill_handler(data):
     return True, user_ids
 
 def extract_title(data):
-    end_of_title = None
-    start_of_title = None
     for entity in data["message"]["entities"]:
-        if entity["type"] == "cashtag":
-            print("found cashtag", entity["offset"])
-            end_of_title = entity["offset"]
-        if entity["type"] == "bot_command":
-            start_of_title = entity["offset"] + entity["length"]
-    print(start_of_title, end_of_title)
-    return data["message"]["text"][start_of_title:end_of_title]
+        if entity["type"] == "hashtag":
+            return data["message"]["text"][entity["offset"]:entity["offset"]+entity["length"]]
