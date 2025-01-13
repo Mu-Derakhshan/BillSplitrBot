@@ -6,13 +6,30 @@ app = create_app()
 if __name__ == "__main__":
     setMyCommands(
         [
-            {"command": "register", "description": "register yourself in this group"},
-            {"command": "add_bill", "description": "add your bill"},
-            {"command": "pay", "description": "use this to pay your debts"},
-            {"command": "summary", "description": "summary of all bills in the group"},
+            {
+                "command": "register",
+                "description": "register yourself in this group",
+                "scope": {"type": "all_group_chats"},
+            },
+            {
+                "command": "add_bill",
+                "description": "add your bill",
+                "scope": {"type": "all_group_chats"},
+            },
+            {
+                "command": "pay",
+                "description": "use this to pay your debts",
+                "scope": {"type": "all_group_chats"},
+            },
+            {
+                "command": "summary",
+                "description": "summary of all bills in the group",
+                "scope": {"type": "all_group_chats"},
+            },
             {
                 "command": "my_debts",
                 "description": "see the summary of your bills only",
+                "scope": {"type": "all_group_chats"},
             },
         ]
     )
