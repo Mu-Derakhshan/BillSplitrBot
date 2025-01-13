@@ -1,5 +1,5 @@
-from pymongo import MongoClient
 from flask import current_app, g
+from pymongo import MongoClient
 
 
 def get_db():

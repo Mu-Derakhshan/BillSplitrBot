@@ -1,9 +1,11 @@
-from flask import Blueprint, request, jsonify
+from bson import ObjectId
+from flask import Blueprint, jsonify, request
+from jinja2 import Template
+
 from api import sendMessage
 from db import get_db
-from helpers import extract_user_ids, extract_title, extract_amount, escape_markdown_v2
-from jinja2 import Template
-from bson import ObjectId
+from helpers import (escape_markdown_v2, extract_amount, extract_title,
+                     extract_user_ids)
 
 webhook = Blueprint("webhook", __name__)
 

@@ -5,11 +5,11 @@ Functions include sending messages, setting webhooks, getting updates, etc.
 Main contributor: Muhammad Derakhshan
 """
 
-import requests
 import json
 import os
-from dotenv import load_dotenv
 
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 botToken = os.getenv("BOT_TOKEN")

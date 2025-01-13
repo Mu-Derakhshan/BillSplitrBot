@@ -1,4 +1,5 @@
 from flask import Flask
+
 from db import close_db
 
 

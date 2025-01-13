@@ -1,5 +1,5 @@
-from app import create_app
 from api import setMyCommands
+from app import create_app
 
 app = create_app()
 
