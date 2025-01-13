@@ -5,4 +5,4 @@ username
 {% for user_id, name in text_mentions_unknown %}
 [{{name}}](tg://user?id={{user_id}})
 {% endfor %}
-please use /register if you want to use the bot\\.
+please use /register if you want to use the bot
