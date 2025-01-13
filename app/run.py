@@ -17,6 +17,12 @@ if __name__ == "__main__":
         ],
         scope={"type": "all_group_chats"}
     )
+    setMyCommands(
+        [
+            {"command": "reset", "description": "remove all expenses and bills paid and unpaid use carefully"},
+        ],
+        scope={"type": "all_chat_administrators"}
+    )
     app.run(
         host="0.0.0.0",
         port=443,
