@@ -11,11 +11,12 @@ import os
 from dotenv import load_dotenv
 from client import get_client
 
-def get_user_id(username):
+async def get_user_id(username):
     client = get_client()
     phone_number = '14808537840'
-    with client:
-        user = client.get_entity(username)
+    async with client:
+        user = await client.get_entity(username)
+        print(user_id)
         return user.id
 
 

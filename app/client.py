@@ -1,4 +1,4 @@
-from telethon.sync import TelegramClient
+from telethon import TelegramClient
 from flask import g
 
 
