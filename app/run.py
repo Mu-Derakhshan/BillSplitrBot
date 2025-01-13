@@ -14,7 +14,8 @@ if __name__ == "__main__":
                 "command": "my_debts",
                 "description": "see the summary of your bills only",
             },
-        ]
+        ],
+        scope={"type": "all_group_chats"}
     )
     app.run(
         host="0.0.0.0",
