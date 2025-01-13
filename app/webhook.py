@@ -183,11 +183,3 @@ def handle_webhook():
                     sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
 
     return "OK", 200
-
-    """# Insert the data into the MongoDB collection
-    collection = mongo.db.your_collection_name
-    result = collection.insert_one(data)
-
-    # Return a response with the inserted document ID
-    response = {"message": "Webhook received", "data": data, "id": str(result.inserted_id)}
-    return jsonify(response)"""
