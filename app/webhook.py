@@ -51,7 +51,7 @@ def handle_webhook():
                         return "OK", 200
                     title = extract_title(data)
                     amount = extract_amount(data)
-                    creditor = msg["from"]["id"]
+                    creditor = int(msg["from"]["id"])
                     new_expense = db.expenses.insert_one({
                         "chat_id": msg["chat"]["id"],
                         "title": title,
