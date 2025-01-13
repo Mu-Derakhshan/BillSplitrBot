@@ -31,6 +31,11 @@ if __name__ == "__main__":
                 "description": "see the summary of your bills only",
                 "scope": {"type": "all_group_chats"},
             },
+            {
+                "command": "reset",
+                "description": "reset and delete the history of all expenses and bills history",
+                "scope": {"type": "all_chat_administrators"},
+            }
         ]
     )
     app.run(
