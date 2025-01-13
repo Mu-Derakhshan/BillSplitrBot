@@ -19,3 +19,13 @@ def add_bill_handler(data):
     if usernames_unknown:
         return False, usernames_unknown
     return True, user_ids
+
+def extract_title(data):
+    end_of_title = None
+    start_of_title = None
+    for entity in data["message"]["entities"]:
+        if entity["type"] == "cashtag":
+            end_of_title = entity["offset"]
+        if entity["type"] == "bot_command":
+            start_of_title = entity["offset"] + entity["length"]
+    return data["message"]["text"][start_of_title:end_of_title]

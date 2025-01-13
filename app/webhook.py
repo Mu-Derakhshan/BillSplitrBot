@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
-from handlers import add_bill_handler
+from handlers import add_bill_handler, extract_title
 
 webhook = Blueprint('webhook', __name__)
 
@@ -49,7 +49,8 @@ def handle_webhook():
                     if not done:
                         sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
                     else:
-                        sendMessage(msg["chat"]["id"], "added the bill successfully")
+                        title = extract_title(data)
+                        sendMessage(msg["chat"]["id"], "added the bill successfully with title:\n {title}")
     
     return "OK", 200
 
