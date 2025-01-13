@@ -45,7 +45,7 @@ def handle_webhook():
                 if cmd == "/register@BillSplitrBot":
                     db.users.update_one(
                         {"user_id": msg["from"]["id"]},
-                        {"$set": {"username": msg["from"].get("username", "")}},
+                        {"$set": {"username": msg["from"].get("username", ""), "first_name": msg["from"]["first_name"]}},
                         upsert=True
                     )
                     sendMessage(msg["chat"]["id"], "You are registered successfully")
