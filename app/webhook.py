@@ -131,6 +131,7 @@ def handle_webhook():
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
                     bill_ids = msg["text"][len("/pay@BillSplitrBot")+1:].split()
+                    print(bill_ids)
                     for bill_id in bill_ids:
                         print(bill_id)
                         result = db.bills.update_one(
