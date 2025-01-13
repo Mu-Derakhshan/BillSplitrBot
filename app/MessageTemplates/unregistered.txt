@@ -1,6 +1,6 @@
 It seems some of the users you mentioned in the bill are not yet registered in the bot
 {% for username in usernames_unknown %}
-username
+{{username}}
 {% endfor %}
 {% for user_id, name in text_mentions_unknown %}
 [{{name}}](tg://user?id={{user_id}})
