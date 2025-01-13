@@ -48,10 +48,30 @@ def handle_webhook():
                     done, user_ids = extract_user_ids(data)
                     if not done:
                         sendMessage(msg["chat"]["id"], " ".join(user_ids)+"\nI don't recognise these people maybe they didn't used the /register command")
-                    else:
-                        title = extract_title(data)
-                        amount = extract_amount(data)
-                        sendMessage(msg["chat"]["id"], f"added the bill successfully with title:\n {title} and with amount: {amount}")
+                        return "OK", 200
+                    title = extract_title(data)
+                    amount = extract_amount(data)
+                    creditor = msg["from"]["id"]
+                    new_expense = db.expenses.insert_one({
+                        "chat_id": msg["chat"]["id"],
+                        "title": title,
+                        "amount": amount,
+                        "creditor": creditor,
+                        "debtors": user_ids,
+                    })
+                    amount_per_person = amount / len(user_ids)
+                    db.bills.insert_many([
+                        {
+                            "expense_id": new_expense.inserted_id,
+                            "chat_id": msg["chat"]["id"],
+                            "creditor": creditor,
+                            "debtor": debtor,
+                            "amount": amount_per_person,
+                            "is_paid": False
+                        }
+                        for debtor in user_ids if debtor != creditor
+                    ])
+                    sendMessage(msg["chat"]["id"], f"added the bill successfully with title:\n {title}\n with amount: {amount}")
     
     return "OK", 200
 
