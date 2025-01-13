@@ -106,6 +106,7 @@ def handle_webhook():
                         template_string = file.read()
                     template = Template(template_string)
                     context = {"expenses": expenses}
+                    print(expenses)
                     rendered_string = template.render(context)
                     sendMessage(msg["chat"]["id"], rendered_string)
     
