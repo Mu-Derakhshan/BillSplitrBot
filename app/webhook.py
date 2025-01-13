@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from api import sendMessage
 from db import get_db
-from helpers import extract_user_ids, extract_title, extract_amount
+from helpers import extract_user_ids, extract_title, extract_amount, escape_markdown_v2
 from jinja2 import Template
 
 webhook = Blueprint('webhook', __name__)
@@ -86,6 +86,30 @@ def handle_webhook():
                         for debtor in user_ids if debtor != creditor
                     ])
                     sendMessage(msg["chat"]["id"], f"added the bill successfully")
+                if cmd == "/summary@BillSplitrBot":
+                    chat_id = msg["chat"]["id"]
+                    expenses = db.expenses.find({"chat_id": chat_id})
+                    expenses_for_ctx = []
+                    for expense in expenses:
+                        expense["creditor_name"] = db.users.find_one({"user_id": expense["creditor"]})["first_name"]
+                        if expense["creditor"] in expense["debtors"]:
+                            expense["amount_per_person"] = expense["amount"] / len(expense["debtors"])
+                        else:
+                            expense["amount_per_person"] = expense["amount"] / (len(expense["debtors"]) - 1)
+                        debtor_paid_array = []
+                        for debtor in expense["debtors"]:
+                            if (bill := db.bills.find_one({"expense_id": expense["_id"], "chat_id": chat_id, "debtor": debtor})):
+                                is_paid = bill["is_paid"]
+                                debtor_name = db.users.find_one({"user_id": debtor})["first_name"]
+                                debtor_paid_array.append((debtor, debtor_name, is_paid))
+                        expense["debtors"] = debtor_paid_array
+                        expenses_for_ctx.append(expense)
+                    with open('MessageTemplates/summary.txt', 'r') as file:
+                        template_string = file.read()
+                    template = Template(template_string)
+                    context = {"expenses": expenses_for_ctx}
+                    rendered_string = template.render(context)
+                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
     
     return "OK", 200
 

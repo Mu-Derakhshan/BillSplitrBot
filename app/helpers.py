@@ -37,3 +37,10 @@ def extract_amount(data):
     text = re.search(r"[\$€£]\d+(\.\d{1,2})?", data["message"]["text"])[0]
     amount = float(text[1:])
     return amount
+
+
+def escape_markdown_v2(text):
+    special_chars = r"#._"
+    for char in special_chars:
+        text = text.replace(char, f'\\{char}')
+    return text
