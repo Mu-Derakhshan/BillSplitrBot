@@ -93,7 +93,7 @@ def handle_webhook():
                         expense["creditor_name"] = db.users.find_one({"user_id": expense["creditor"]})["first_name"]
                         debtor_paid_array = []
                         for debtor in expense["debtors"]:
-                            is_paid = db.bills.find_one("expense_id": expense["_id"], "chat_id": chat_id, "debtor": debtor)["is_paid"]
+                            is_paid = db.bills.find_one({"expense_id": expense["_id"], "chat_id": chat_id, "debtor": debtor})["is_paid"]
                             debtor_name = db.users.find_one({"user_id": debtor})["first_name"]
                             debtor_paid_array.append((debtor, debtor_name, is_paid))
                         expense["debtors"] = debtor_paid_array
