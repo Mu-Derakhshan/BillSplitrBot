@@ -14,6 +14,7 @@ from client import get_client
 async def get_user_id(username):
     client = get_client()
     phone_number = '14808537840'
+    await client.start(phone_number)
     user = await client.get_entity(username)
     return user.id
 
