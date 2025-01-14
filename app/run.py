@@ -6,6 +6,7 @@ app = create_app()
 if __name__ == "__main__":
     setMyCommands(
         [
+            {"command": "help", "description": "help"},
             {"command": "register", "description": "register yourself in this group"},
             {"command": "add_bill", "description": "add your bill"},
             {"command": "pay", "description": "use this to pay your debts"},
