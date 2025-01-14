@@ -40,7 +40,7 @@ def handle_webhook():
             "member",
         ] and membership_update["old_chat_member"]["status"] in ["left", "kicked"]:
             sendMessage(
-                membership_update["chat"]["id"], "Hello I'm added to your group"
+                membership_update["chat"]["id"], "👋 Hello! You've been added to the group! 🎉\nNeed assistance? Type /help for support! 💬"
             )
             print(f"added to chat {membership_update['chat']['id']}")
 
@@ -65,7 +65,7 @@ def handle_webhook():
                         },
                         upsert=True,
                     )
-                    sendMessage(msg["chat"]["id"], "You are registered successfully")
+                    sendMessage(msg["chat"]["id"], "🎉 Registration Successful! ✅")
                 if cmd == "/add_bill@BillSplitrBot":
                     done, *result = extract_user_ids(data)
                     if not done:
@@ -109,7 +109,7 @@ def handle_webhook():
                             if debtor != creditor
                         ]
                     )
-                    sendMessage(msg["chat"]["id"], f"added the bill successfully")
+                    sendMessage(msg["chat"]["id"], f"✅ Bill added successfully! 🎉")
                 if cmd == "/summary@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     expenses = db.expenses.find({"chat_id": chat_id})
@@ -182,7 +182,7 @@ def handle_webhook():
                             {"_id": ObjectId(bill_id)}, {"$set": {"is_paid": True}}
                         )
                         print(result.modified_count)
-                    sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
+                    sendMessage(chat_id, f"💳 {len(bill_ids)} bills paid by you. Thank you! 🙏")
                 if cmd == "/reset@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     expenses = db.expenses.find({"chat_id": chat_id})
@@ -190,5 +190,5 @@ def handle_webhook():
                     for expense in expenses:
                         db.bills.delete_many({"expense_id": expense["_id"]})
                     db.expenses.delete_many({"chat_id": chat_id})
-                    sendMessage(chat_id, f"{n_expenses} expenses removed")
+                    sendMessage(chat_id, f"❌ {n_expenses} expenses removed")
     return "OK", 200

@@ -1,7 +1,9 @@
-Here is the summary of all of your unpaid debts
+💸 **Your Unpaid Debts Summary** 💸
+
+Here’s a breakdown of all your outstanding debts:
 {% for bill in bills %}
-{{bill.title}}
-amount: {{bill.amount}}
-to whom?: [{{bill.creditor_name}}](tg://user?id={{bill.creditor}})
-pay_id: `{{bill._id}}`
+📜 Bill Title: {{bill.title}}
+💰 Amount: {{bill.amount}}
+👤 Creditor: [{{bill.creditor_name}}](tg://user?id={{bill.creditor}})
+🔑 Pay ID: `{{bill._id}}`
 {% endfor %}
