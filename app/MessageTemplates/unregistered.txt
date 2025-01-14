@@ -7,4 +7,4 @@ It looks like some users mentioned in the bill aren't registered with the bot ye
 {% for user_id, name in text_mentions_unknown %}
 [{{name}}](tg://user?id={{user_id}})
 {% endfor %}
-📝 Reminder: Please use the /register command to sign up and start using the bot!
+📝 Reminder: Please use the /register command to sign up and start using the bot\!
