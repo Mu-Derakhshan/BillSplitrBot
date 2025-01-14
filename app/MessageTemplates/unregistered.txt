@@ -1,4 +1,4 @@
-🚨 Attention! 🚨
+🚨 Attention\! 🚨
 
 It looks like some users mentioned in the bill aren't registered with the bot yet:
 {% for username in usernames_unknown %}
