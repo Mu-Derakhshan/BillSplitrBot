@@ -1,4 +1,4 @@
-🌟 **Summary of Unpaid Bills** 🌟
+🌟 **Summary of not paid Bills** 🌟
 {% for expense in expenses %}
 💼 {{expense.title}}
 💰 amount per person in debtors: {{expense.amount_per_person}}
