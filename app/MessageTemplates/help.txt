@@ -21,6 +21,6 @@ You can add as many pay\_ids as you need\. 🔄
 Copy the **pay\_id** and see who you have a debt to\. A quick way to manage your debts\! ⚖️
 
 5\. *Get a summary of all group expenses* with *`/summary`* 📑:  
-This command will give you an overview of all the expenses shared in the group\ 🧮.
+This command will give you an overview of all the expenses shared in the group\. 🧮
 
 Feel free to reach out if you have any questions\! 😊
