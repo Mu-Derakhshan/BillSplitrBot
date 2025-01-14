@@ -32,12 +32,14 @@ def getMe():
     return response.json()
 
 
-def sendMessage(chatId, text):
+def sendMessage(chatId, text, use_markdownv2=False):
     """
     Use this method to send text messages. On success, the sent Message is returned.
     """
     requestUrl = f"{baseUrl}sendMessage"
-    payload = {"chat_id": chatId, "text": text, "parse_mode": "MarkdownV2"}
+    payload = {"chat_id": chatId, "text": text}
+    if use_markdownv2:
+        payload["parse_mode"] = "MarkdownV2"
     response = requests.post(requestUrl, json=payload)
     if response.status_code != 200:
         print(f"Error: {response.status_code}")
@@ -135,6 +137,7 @@ def setMyCommands(commands, scope=None, languageCode=None):
     response = requests.post(requestURL, json=payload)
     if response.status_code != 200:
         print(f"Error: {response.status_code}")
+        print(response.json)
         return None
     return response.json()
 

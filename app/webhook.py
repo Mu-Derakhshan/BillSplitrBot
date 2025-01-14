@@ -79,7 +79,7 @@ def handle_webhook():
                             "text_mentions_unknown": text_mentions_unknown,
                         }
                         rendered_string = template.render(context)
-                        sendMessage(msg["chat"]["id"], rendered_string)
+                        sendMessage(msg["chat"]["id"], rendered_string, use_markdownv2=True)
                         return "OK", 200
                     user_ids = result[0]
                     title = extract_title(data)
@@ -147,7 +147,7 @@ def handle_webhook():
                     template = Template(template_string)
                     context = {"expenses": expenses_for_ctx}
                     rendered_string = template.render(context)
-                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
+                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string), use_markdownv2=True)
                 if cmd == "/my_debts@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
@@ -170,7 +170,7 @@ def handle_webhook():
                     template = Template(template_string)
                     context = {"bills": bills_for_ctx}
                     rendered_string = template.render(context)
-                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string))
+                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string), use_markdownv2=True)
                 if cmd == "/pay@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
@@ -183,5 +183,12 @@ def handle_webhook():
                         )
                         print(result.modified_count)
                     sendMessage(chat_id, f"{len(bill_ids)} bills paid by you thanks")
-
+                if cmd == "/reset@BillSplitrBot":
+                    chat_id = msg["chat"]["id"]
+                    expenses = db.expenses.find({"chat_id": chat_id})
+                    n_expenses = len(list(expenses))
+                    for expense in expenses:
+                        db.bills.delete_many({"expense_id": expense["_id"]})
+                    db.expenses.delete_many({"chat_id": chat_id})
+                    sendMessage(chat_id, f"{n_expenses} expenses removed")
     return "OK", 200
