@@ -8,8 +8,8 @@ Let's get started with the commands:
 2\. *Add a new bill* with *`/add_bill`*:  
    Format it like this:  
    `/add_bill \#title $20 @user1 @user2 @myself`  
-   **\#title**: Add a title for the bill (the `\#` is necessary for tracking)\.  
-   **$ or €**: Specify the amount (can be a decimal, e\.g\., `$20\.50`)\.  
+   **\#title**: Add a title for the bill \(the `\#` is necessary for tracking\)\.  
+   **$ or €**: Specify the amount \(can be a decimal, e\.g\., `$20\.50`\)\.  
    **Tag everyone involved**: Mention the people in the bill, including yourself if you're part of it.  
 
 3\. *Pay your debts* with *`/pay`*:  
