@@ -16,6 +16,6 @@ def create_app():
     app.register_blueprint(webhook_blueprint)
 
     app.teardown_appcontext(close_db)
-    app.register_error_handler(500, handle_internal_error)
+    app.errorhandler(500, handle_internal_error)
 
     return app
