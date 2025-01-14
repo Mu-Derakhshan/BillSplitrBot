@@ -1,0 +1,30 @@
+*Welcome to BillSplitr 🧾💰 Help!*
+
+Let's get started with the commands:
+
+1\. *First things first, use* `/register` *to start using the bot*  
+   Every user must register to be part of the system\. Simply type `/register` to get started!
+
+2\. *Add a new bill* with *`/add_bill`*:  
+   Format it like this:  
+   `/add_bill #title $20 @user1 @user2 @myself`  
+   - **#title**: Add a title for the bill (the `#` is necessary for tracking)\.  
+   - **$ or €**: Specify the amount (can be a decimal, e\.g\., `$20\.50`)\.  
+   - **Tag everyone involved**: Mention the people in the bill, including yourself if you're part of it.  
+
+   Example:
+```/add_bill #Dinner $20 @user1 @user2 @myself```
+3\. *Pay your debts* with *`/pay`*:  
+If you’ve paid your debt to someone, simply copy the **pay_id** and use the command like this:  
+`/pay [pay_id] [another_pay_id]`  
+You can add as many pay_ids as you need\.
+
+4\. *Check who you owe* with *`/my_debts`*:  
+Copy the **pay_id** and see who you have a debt to\. A quick way to manage your debts!
+
+5\. *Get a summary of all group expenses* with *`/summary`*:  
+This command will give you an overview of all the expenses shared in the group\.
+
+---
+
+Feel free to reach out if you have any questions\! 😊
