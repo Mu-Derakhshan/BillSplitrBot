@@ -10,7 +10,7 @@ Let's get started with the commands:
    `/add_bill \#title $20 @user1 @user2 @myself`  
    **\#title**: Add a title for the bill \(the `\#` is necessary for tracking\)\.  
    **$ or €**: Specify the amount \(can be a decimal, e\.g\., `$20\.50`\)\.  
-   **Tag everyone involved**: Mention the people in the bill, including yourself if you're part of it.  
+   **Tag everyone involved**: Mention the people in the bill, including yourself if you're part of it\.  
 
 3\. *Pay your debts* with *`/pay`*:  
 If you’ve paid your debt to someone, simply copy the **pay_id** and use the command like this:  
