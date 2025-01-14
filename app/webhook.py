@@ -191,4 +191,8 @@ def handle_webhook():
                         db.bills.delete_many({"expense_id": expense["_id"]})
                     db.expenses.delete_many({"chat_id": chat_id})
                     sendMessage(chat_id, f"❌ {n_expenses} expenses removed")
+                if cmd == "/help@BillSplitrBot":
+                    with open("MessageTemplates/help.txt", "r") as file:
+                        help_msg = file.read()
+                    sendMessage(msg["chat"]["id"], help_msg, use_markdownv2=True)
     return "OK", 200
