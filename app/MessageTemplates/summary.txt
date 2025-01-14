@@ -1,10 +1,9 @@
-Here is the summary of all unpaid bills
+🌟 **Summary of Unpaid Bills** 🌟
 {% for expense in expenses %}
-{{expense.title}}
-amount per person in debtors: {{expense.amount_per_person}}
-creditor: [{{expense.creditor_name}}](tg://user?id={{expense.creditor}})
-debtors:
-{% for debtor_user_id, debtor_name, is_paid in expense.debtors %}
-[{{debtor_name}}](tg://user?id={{debtor_user_id}}) {{ 'Paid' if is_paid else 'Unpaid' }}
+💼 {{expense.title}}
+💰 amount per person in debtors: {{expense.amount_per_person}}
+👤 creditor: [{{expense.creditor_name}}](tg://user?id={{expense.creditor}})
+🧾 debtors: {% for debtor_user_id, debtor_name, is_paid in expense.debtors %}
+[{{debtor_name}}](tg://user?id={{debtor_user_id}}) {{ '✅ Paid' if is_paid else '❌ Not paid' }}
 {% endfor %}
 {% endfor %}
