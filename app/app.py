@@ -1,6 +1,7 @@
 from flask import Flask
 
 from db import close_db
+from middlewares import handle_internal_error
 
 
 def create_app():
@@ -15,5 +16,6 @@ def create_app():
     app.register_blueprint(webhook_blueprint)
 
     app.teardown_appcontext(close_db)
+    app.register_error_handler(500, handle_internal_error)
 
     return app
