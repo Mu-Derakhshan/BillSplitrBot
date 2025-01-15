@@ -152,6 +152,7 @@ def handle_webhook():
                 if cmd == "/my_debts@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
+                    print("I'm here")
                     bills = db.bills.find(
                         {"chat_id": chat_id, "debtor": user_id, "is_paid": False}
                     )
