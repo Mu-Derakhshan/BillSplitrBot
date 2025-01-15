@@ -5,7 +5,7 @@ from jinja2 import Template
 from api import sendMessage
 from db import get_db
 from helpers import (escape_markdown_v2, extract_amount, extract_title,
-                     extract_user_ids)
+                     extract_user_ids, remove_all_expenses_of_chat_id)
 
 webhook = Blueprint("webhook", __name__)
 
@@ -34,6 +34,7 @@ def handle_webhook():
             "administrator",
             "member",
         ] and membership_update["new_chat_member"]["status"] in ["left", "kicked"]:
+            remove_all_expenses_of_chat_id(membership_update["chat"]["id"])
             print(f"Removed from chat {membership_update['chat']['id']}")
         elif membership_update["new_chat_member"]["status"] in [
             "administrator",
@@ -185,11 +186,7 @@ def handle_webhook():
                     sendMessage(chat_id, f"💳 {len(bill_ids)} bills paid by you. Thank you! 🙏")
                 if cmd == "/reset@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
-                    expenses = db.expenses.find({"chat_id": chat_id})
-                    n_expenses = len(list(expenses))
-                    for expense in expenses:
-                        db.bills.delete_many({"expense_id": expense["_id"]})
-                    db.expenses.delete_many({"chat_id": chat_id})
+                    n_expenses = remove_all_expenses_of_chat_id(chat_id)
                     sendMessage(chat_id, f"❌ {n_expenses} expenses removed")
                 if cmd == "/help@BillSplitrBot":
                     with open("MessageTemplates/help.txt", "r") as file:

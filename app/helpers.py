@@ -53,3 +53,13 @@ def escape_markdown_v2(text):
     for char in special_chars:
         text = text.replace(char, f"\\{char}")
     return text
+
+
+def remove_all_expenses_of_chat_id(chat_id):
+    db = get_db()
+    expenses = db.expenses.find({"chat_id": chat_id})
+    n_expenses = len(list(expenses))
+    for expense in expenses:
+        db.bills.delete_many({"expense_id": expense["_id"]})
+    db.expenses.delete_many({"chat_id": chat_id})
+    return n_expenses
