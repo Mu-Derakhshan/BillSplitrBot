@@ -159,10 +159,12 @@ def handle_webhook():
                     bills_for_ctx = []
                     for bill in bills:
                         expense_id = bill["expense_id"]
+                        print("I'm here2")
                         expense = db.expenses.find_one(
                             {"chat_id": chat_id, "_id": expense_id}
                         )
                         bill["title"] = expense["title"]
+                        print("I'm here3")
                         bill["creditor_name"] = db.users.find_one(
                             {"user_id": bill["creditor"]}
                         )["first_name"]
