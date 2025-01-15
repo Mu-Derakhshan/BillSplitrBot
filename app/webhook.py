@@ -1,11 +1,15 @@
-from bson import ObjectId
-from flask import Blueprint, jsonify, request
-from jinja2 import Template
-
 from api import sendMessage
+from bson import ObjectId
 from db import get_db
-from helpers import (escape_markdown_v2, extract_amount, extract_title,
-                     extract_user_ids, remove_all_expenses_of_chat_id)
+from flask import Blueprint, jsonify, request
+from helpers import (
+    escape_markdown_v2,
+    extract_amount,
+    extract_title,
+    extract_user_ids,
+    remove_all_expenses_of_chat_id,
+)
+from jinja2 import Template
 
 webhook = Blueprint("webhook", __name__)
 
@@ -41,7 +45,8 @@ def handle_webhook():
             "member",
         ] and membership_update["old_chat_member"]["status"] in ["left", "kicked"]:
             sendMessage(
-                membership_update["chat"]["id"], "👋 Hello! You've been added to the group! 🎉\nNeed assistance? Type /help for support! 💬"
+                membership_update["chat"]["id"],
+                "👋 Hello! You've been added to the group! 🎉\nNeed assistance? Type /help for support! 💬",
             )
             print(f"added to chat {membership_update['chat']['id']}")
 
@@ -80,7 +85,9 @@ def handle_webhook():
                             "text_mentions_unknown": text_mentions_unknown,
                         }
                         rendered_string = template.render(context)
-                        sendMessage(msg["chat"]["id"], rendered_string, use_markdownv2=True)
+                        sendMessage(
+                            msg["chat"]["id"], rendered_string, use_markdownv2=True
+                        )
                         return "OK", 200
                     user_ids = result[0]
                     title = extract_title(data)
@@ -148,7 +155,11 @@ def handle_webhook():
                     template = Template(template_string)
                     context = {"expenses": expenses_for_ctx}
                     rendered_string = template.render(context)
-                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string), use_markdownv2=True)
+                    sendMessage(
+                        msg["chat"]["id"],
+                        escape_markdown_v2(rendered_string),
+                        use_markdownv2=True,
+                    )
                 if cmd == "/my_debts@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
@@ -171,7 +182,11 @@ def handle_webhook():
                     template = Template(template_string)
                     context = {"bills": bills_for_ctx}
                     rendered_string = template.render(context)
-                    sendMessage(msg["chat"]["id"], escape_markdown_v2(rendered_string), use_markdownv2=True)
+                    sendMessage(
+                        msg["chat"]["id"],
+                        escape_markdown_v2(rendered_string),
+                        use_markdownv2=True,
+                    )
                 if cmd == "/pay@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     user_id = msg["from"]["id"]
@@ -183,7 +198,9 @@ def handle_webhook():
                             {"_id": ObjectId(bill_id)}, {"$set": {"is_paid": True}}
                         )
                         print(result.modified_count)
-                    sendMessage(chat_id, f"💳 {len(bill_ids)} bills paid by you. Thank you! 🙏")
+                    sendMessage(
+                        chat_id, f"💳 {len(bill_ids)} bills paid by you. Thank you! 🙏"
+                    )
                 if cmd == "/reset@BillSplitrBot":
                     chat_id = msg["chat"]["id"]
                     n_expenses = remove_all_expenses_of_chat_id(chat_id)

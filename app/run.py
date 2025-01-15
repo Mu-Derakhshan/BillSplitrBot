@@ -1,4 +1,5 @@
 from api import setMyCommands
+
 from app import create_app
 
 app = create_app()
@@ -15,9 +16,12 @@ if __name__ == "__main__":
                 "command": "my_debts",
                 "description": "see the summary of your bills only",
             },
-            {"command": "reset", "description": "remove all expenses and bills paid and unpaid use carefully"},
+            {
+                "command": "reset",
+                "description": "remove all expenses and bills paid and unpaid use carefully",
+            },
         ],
-        scope={"type": "all_group_chats"}
+        scope={"type": "all_group_chats"},
     )
     app.run(
         host="0.0.0.0",

@@ -1,6 +1,5 @@
-from flask import Flask
-
 from db import close_db
+from flask import Flask
 from middlewares import handle_internal_error
 
 

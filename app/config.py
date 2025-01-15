@@ -1,6 +1,7 @@
 import os
-from dotenv import load_dotenv
 from urllib.parse import quote_plus
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -12,6 +13,7 @@ database_name = os.getenv("MONGO_DATABASE")
 
 escaped_username = quote_plus(username)
 escaped_password = quote_plus(password)
+
 
 class Config:
     DEBUG = True
