@@ -3,6 +3,7 @@ from flask import request
 
 
 def handle_internal_error(error):
+    print(error)
     data = request.json
     chat_id = data["message"]["chat"]["id"]
     sendMessage(chat_id, "⚠️ An error occurred. Please double-check your command! 🔄")
