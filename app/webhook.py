@@ -164,6 +164,7 @@ def handle_webhook():
                         expense = db.expenses.find_one(
                             {"chat_id": chat_id, "_id": expense_id}
                         )
+                        print(expense)
                         bill["title"] = expense["title"]
                         print("I'm here3")
                         bill["creditor_name"] = db.users.find_one(
