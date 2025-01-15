@@ -156,6 +156,7 @@ def handle_webhook():
                     bills = db.bills.find(
                         {"chat_id": chat_id, "debtor": user_id, "is_paid": False}
                     )
+                    print(bills)
                     bills_for_ctx = []
                     for bill in bills:
                         expense_id = bill["expense_id"]
